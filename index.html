@@ -1,314 +1,251 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frost Tech | Smart-Student</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>msce mock</title><style>
+* {
+  box-sizing: border-box;
+}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f5f6f8;
+  color: #222;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    }
+/* Search bar */
+.searchBox {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f5f6f8;
+  padding: 12px;
+}
 
-    body {
-      background: linear-gradient(135deg, #eaf3ff, #f7fbff);
-      color: #0b2b44;
-    }
+.searchBox input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  outline: none;
+  transition: 0.25s;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+.searchBox input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
 
-    /* HEADER */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 50px;
-    }
+/* Container */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  padding: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  transition: 0.25s ease;
+}
 
-    .logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #0e3a6b, #051f3a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 22px;
-    }
+/* Hover (desktop only) */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+}
 
-    .version {
-      padding: 8px 14px;
-      background: #e7f1ff;
-      border: 1px solid #cfe2ff;
-      border-radius: 20px;
-      font-size: 14px;
-    }
+/* Top */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+.title {
+  font-size: 15px;
+  font-weight: 600;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+/* Arrow */
+.arrow {
+  transition: 0.3s;
+}
 
-    .hero p {
-      font-size: 18px;
-      color: #2b4a6a;
-    }
+.card.active .arrow {
+  transform: rotate(180deg);
+}
 
-    /* FEATURES */
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin: 30px 0;
-    }
+/* Expand */
+.extra {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.35s ease;
+  font-size: 14px;
+  color: #555;
+}
 
-    .features span {
-      background: white;
-      padding: 10px 15px;
-      border-radius: 20px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
-      font-weight: 500;
-    }
+.card.active .extra {
+  max-height: 150px;
+  opacity: 1;
+  margin-top: 12px;
+}
 
-    /* DOWNLOAD */
-    .download {
-      text-align: center;
-      margin: 40px 0;
-    }
+/* Download button */
+.download {
+  display: inline-block;
+  margin-top: 10px;
+  background: #007bff;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
 
-    .download h2 {
-      margin-bottom: 20px;
-    }
+.download:hover {
+  background: #0056cc;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+/* Skeleton */
+.skeleton {
+  height: 65px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: loading 1.2s infinite;
+}
 
-    /* BUTTONS */
-    .btn {
-      padding: 14px 22px;
-      border-radius: 14px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      transition: 0.25s ease;
-      box-shadow: 0 12px 22px rgba(0,0,0,0.08);
-      min-width: 180px;
-      justify-content: center;
-      color: white;
-    }
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
-    .btn i {
-      font-size: 20px;
-    }
+/* Empty state */
+.empty {
+  text-align: center;
+  color: #777;
+  padding: 30px 10px;
+  font-size: 14px;
+}
 
-    .drive {
-      background: linear-gradient(135deg, #0f9d58, #34a853);
-    }
+/* Tablet */
+@media (min-width: 600px) {
+  .title { font-size: 16px; }
+}
 
-    .drive:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 28px rgba(15,157,88,0.35);
-    }
+/* Desktop */
+@media (min-width: 900px) {
+  .container { padding: 20px; }
+  .card { padding: 18px; }
+  .title { font-size: 17px; }
+}
+</style></head><body><!-- SEARCH --><div class="searchBox">
+  <input type="text" id="search" placeholder="Search Papers">
+</div><div class="container">
+  <div id="list"><!-- Skeleton -->
+<div class="skeleton"></div>
+<div class="skeleton"></div>
+<div class="skeleton"></div>
 
-    .dropbox {
-      background: linear-gradient(135deg, #0061ff, #3b82f6);
-    }
+  </div>
+</div><script>
+const API = "https://script.google.com/macros/s/AKfycbyyGGKV7NESJtfLw8yTLqRCxUrfClYfS9Y0ya1YyKeuUf4h3VrSt2MFVSUsJLsX-0Y-/exec";
 
-    .dropbox:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 28px rgba(0,97,255,0.35);
-    }
+let openCard = null;
+let allData = [];
 
-    .mirror {
-      background: linear-gradient(135deg, #1f2a44, #3b4b6b);
-    }
+// Fetch data
+fetch(API)
+  .then(res => res.json())
+  .then(data => {
+    allData = data;
+    render(data);
+  })
+  .catch(() => {
+    document.getElementById("list").innerHTML =
+      "<p class='empty'>Failed to load papers</p>";
+  });
 
-    .mirror:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 28px rgba(31,42,68,0.35);
-    }
+// Render
+function render(data) {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
 
-    /* GALLERY */
-    .gallery {
-      margin-top: 60px;
-    }
+  // Empty state
+  if (!data.length) {
+    list.innerHTML = "<div class='empty'>No papers found</div>";
+    return;
+  }
 
-    .gallery h2 {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+  data.forEach(item => {
 
-    /* SLIDER */
-    .slider {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      padding: 10px 5px 20px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
+    const card = document.createElement("div");
+    card.className = "card";
 
-    .slider::-webkit-scrollbar {
-      display: none;
-    }
-
-    .slide {
-      min-width: 150px;
-      flex: 0 0 auto;
-      scroll-snap-align: center;
-      border-radius: 16px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
-    }
-
-    .slide:hover {
-      transform: translateY(-4px);
-    }
-
-    .slide img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* FOOTER */
-    .footer {
-      margin-top: 60px;
-      text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid #d9e8ff;
-      color: #2c4f73;
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .slide {
-        min-width: 130px;
-      }
-
-      .slide img {
-        height: 200px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="brand">
-      <div class="logo"><i class="fas fa-snowflake"></i></div>
-      <div>
-        <h3>Frost Tech</h3>
-        <small>Smart Education</small>
+    card.innerHTML = `
+      <div class="top">
+        <div class="title">${item.title || "Untitled"}</div>
+        <div class="arrow">⌄</div>
       </div>
-    </div>
 
-    <div class="version">
-      <i class="fas fa-check-circle"></i> Smart-Student v2.0
-    </div>
-  </div>
+      <div class="extra">
+        <div>📦 Size: ${item.size || "Unknown"}</div>
+        <a class="download" href="${item.download}" target="_blank">Download</a>
+      </div>
+    `;
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Smart-Student</h1>
-    <p>Your digital backpack for books, notes & past papers</p>
-  </div>
+    card.querySelector(".top").onclick = () => {
+      if (openCard && openCard !== card) {
+        openCard.classList.remove("active");
+      }
 
-  <!-- FEATURES -->
-  <div class="features">
-    <span><i class="fas fa-book"></i> Textbooks</span>
-    <span><i class="fas fa-file-alt"></i> Past Papers</span>
-    <span><i class="fas fa-notes-medical"></i> Study Notes</span>
-    <span><i class="fas fa-wifi"></i> Offline Access</span>
-  </div>
+      card.classList.toggle("active");
+      openCard = card.classList.contains("active") ? card : null;
+    };
 
-  <!-- DOWNLOAD -->
-  <div class="download">
-    <h2>Download Now</h2>
+    list.appendChild(card);
+  });
+}
 
-    <div class="buttons">
+// Search (FIXED)
+document.getElementById("search").addEventListener("input", function(e) {
+  const value = e.target.value.toLowerCase().trim();
 
-      <!-- GOOGLE DRIVE DIRECT -->
-      <a class="btn drive"
-         href="https://drive.google.com/file/d/1-nmEZRWQtURBBk55UgSNvEI8lItcrzsI/view?usp=drivesdk">
-        <i class="fab fa-google-drive"></i> Google Drive
-      </a>
+  // Show all if empty
+  if (!value) {
+    render(allData);
+    return;
+  }
 
-      <!-- DROPBOX DIRECT -->
-      <a class="btn dropbox"
-         href="https://www.dropbox.com/s/YOUR_FILE/SmartStudent.apk?dl=1">
-        <i class="fab fa-dropbox"></i> Dropbox
-      </a>
+  const filtered = allData.filter(item => {
+    const title = (item.title || "").toLowerCase();
+    const subject = (item.subject || "").toLowerCase();
+    const paper = (item.paper || "").toLowerCase();
+    const year = (item.year || "").toString();
 
-      <!-- MIRROR -->
-      <a class="btn mirror"
-         href="https://your-mirror-link.com/SmartStudent.apk">
-        <i class="fas fa-cloud-download-alt"></i> Mirror Link
-      </a>
+    return (
+      title.includes(value) ||
+      subject.includes(value) ||
+      paper.includes(value) ||
+      year.includes(value)
+    );
+  });
 
-    </div>
-  </div>
-
-  <!-- GALLERY -->
-  <div class="gallery">
-    <h2>App Screenshots</h2>
-
-    <div class="slider">
-
-      <div class="slide"><img src="img1.jpg" alt=""></div>
-      <div class="slide"><img src="img2.jpg" alt=""></div>
-      <div class="slide"><img src="img3.jpg" alt=""></div>
-      <div class="slide"><img src="img4.jpg" alt=""></div>
-      <div class="slide"><img src="img5.jpg" alt=""></div>
-
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <p>© 2026 Frost Tech • Smart-Student</p>
-  </div>
-
-</div>
-
-</body>
+  render(filtered);
+});
+</script></body>
 </html>
